@@ -1,4 +1,4 @@
-# Copyright (c) 2024 zhen qin
+# Copyright (c) 2024 Doraemonzzz
 # CREDITS: This comes almost as-is from the Triton layer norm tutorial
 # https://github.com/openai/triton/blob/master/python/tutorials/05-layer-norm.py
 
