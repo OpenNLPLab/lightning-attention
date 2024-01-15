@@ -47,7 +47,7 @@ srms-memory_bwd-batch12-dim2048-dtype_bf16:
 6  32768.0  7604.700000  27572.700000
 ```
 
-## Lightning2 with pad
+## Lightning2
 ```
 lightning2-speed_fwd-batch4-head32-qk_dim128-v_dim128-dtype_bf16:
          n     Triton       Flash    Xformers
@@ -58,6 +58,7 @@ lightning2-speed_fwd-batch4-head32-qk_dim128-v_dim128-dtype_bf16:
 4   8192.0   4.462824   10.487619   18.328091
 5  16384.0   8.816148   40.497246   72.606529
 6  32768.0  17.641855  162.978043  285.161804
+
 lightning2-speed_bwd-batch4-head32-qk_dim128-v_dim128-dtype_bf16:
          n     Triton       Flash     Xformers
 0    512.0   1.166269    0.396368     0.796550
@@ -67,6 +68,7 @@ lightning2-speed_bwd-batch4-head32-qk_dim128-v_dim128-dtype_bf16:
 4   8192.0  18.524307   31.988714    72.275970
 5  16384.0  37.076271  120.425346   275.637726
 6  32768.0  74.256706  470.944183  1078.135376
+
 lightning2-speed_fwd-batch4-head32-qk_dim128-v_dim128-dtype_bf16:
          n       Triton        Flash     Xformers
 0    512.0    64.000488    64.250977    64.250488
@@ -76,6 +78,7 @@ lightning2-speed_fwd-batch4-head32-qk_dim128-v_dim128-dtype_bf16:
 4   8192.0  1024.000488  1028.000977  1028.000488
 5  16384.0  2048.000488  2056.000977  2056.000488
 6  32768.0  4096.000488  4112.000977  4112.000488
+
 lightning2-speed_bwd-batch4-head32-qk_dim128-v_dim128-dtype_bf16:
          n        Triton         Flash      Xformers
 0    512.0    173.600488    206.100977    270.100977
