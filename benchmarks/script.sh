@@ -1,7 +1,7 @@
 date=$(date '+%Y-%m-%d-%H:%M:%S')
 
 file=benchmark_srmsnorm
-# file=benchmark_lightning2
+file=benchmark_lightning2
 
 mkdir -p log
 
