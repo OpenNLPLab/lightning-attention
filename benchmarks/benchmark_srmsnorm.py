@@ -23,7 +23,7 @@ speed_configs = [
         x_names=["n"],
         x_vals=[2**i for i in range(9, 16)],
         xlabel="Sequence Length",
-        ylabel="Execution Time (ms)",
+        ylabel="Execution Time(ms)",
         line_arg="provider",
         line_vals=["triton", "torch"],
         line_names=["Triton", "Torch"],
@@ -34,7 +34,7 @@ speed_configs = [
             ("blue", "-"),
             ("black", "-"),
         ],
-        plot_name=f"srms-speed-{mode}-batch{b}-dim{d}-dtype-{dtype_name}",
+        plot_name=f"srms-speed_{mode}-batch{b}-dim{d}-dtype_{dtype_name}",
         args={
             "b": b,
             "d": d,
@@ -44,7 +44,7 @@ speed_configs = [
         },
     )
     for mode in ["fwd", "bwd"]
-    for dtype_name in ["fp32", "fp16", "bf16"]
+    for dtype_name in ["bf16"]
 ]
 
 
@@ -78,7 +78,7 @@ memory_configs = [
         x_names=["n"],
         x_vals=[2**i for i in range(9, 16)],
         xlabel="Sequence Length",
-        ylabel="Execution Time (ms)",
+        ylabel="Memory(mb)",
         line_arg="provider",
         line_vals=["triton", "torch"],
         line_names=["Triton", "Torch"],
@@ -89,7 +89,7 @@ memory_configs = [
             ("blue", "-"),
             ("black", "-"),
         ],
-        plot_name=f"srms-memory-{mode}-batch{b}-dim{d}-dtype-{dtype_name}",
+        plot_name=f"srms-memory_{mode}-batch{b}-dim{d}-dtype_{dtype_name}",
         args={
             "b": b,
             "d": d,
@@ -99,7 +99,7 @@ memory_configs = [
         },
     )
     for mode in ["fwd", "bwd"]
-    for dtype_name in ["fp32", "fp16", "bf16"]
+    for dtype_name in ["bf16"]
 ]
 
 
