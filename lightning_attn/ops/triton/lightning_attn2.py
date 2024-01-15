@@ -408,7 +408,7 @@ class LightningAttention2(torch.autograd.Function):
         BLOCK = 64
         NUM_BLOCK = triton.cdiv(q.shape[2], BLOCK)
         # parallel over channel
-        BLOCK_MODEL = 32
+        BLOCK_MODEL = min(triton.next_power_of_2(e), 32)
         grid = (b * h, triton.cdiv(e, BLOCK_MODEL))
 
         _fwd_kernel[grid](
@@ -502,4 +502,4 @@ class LightningAttention2(torch.autograd.Function):
         return dq, dk, dv, None, None
 
 
-lighting_attn2 = LightningAttention2.apply
+lightning_attn2 = LightningAttention2.apply

@@ -2,6 +2,7 @@ date=$(date '+%Y-%m-%d-%H:%M:%S')
 
 folder=ops
 file=test_srmsnorm
+file=test_lightning2
 
 mkdir -p $folder/log
 
