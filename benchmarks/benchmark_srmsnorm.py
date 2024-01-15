@@ -5,6 +5,7 @@ import torch
 import triton
 
 from lightning_attn.ops import SimpleRMSNorm, SimpleRMSNormTorch
+from lightning_attn.utils import get_memory
 
 b, n, d = 12, 8192, 2048
 device = torch.device("cuda")
@@ -100,13 +101,6 @@ memory_configs = [
     for mode in ["fwd", "bwd"]
     for dtype_name in ["fp32", "fp16", "bf16"]
 ]
-
-
-def get_memory(device):
-    mb_used = torch.cuda.max_memory_allocated(device) / 1024 / 1024
-    torch.cuda.reset_peak_memory_stats(device)
-
-    return mb_used
 
 
 @triton.testing.perf_report(memory_configs)
