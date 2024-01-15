@@ -1,3 +1,5 @@
+# Copyright (c) 2024 Doraemonzzz
+
 import torch
 import triton
 import triton.language as tl
