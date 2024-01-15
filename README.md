@@ -15,22 +15,28 @@ This repository provides the official implementation of Lightning Attention 1/2 
 
 ## Installation
 ```
-pip install lightning_attn2
+pip install lightning_attn
 ```
 
 ## How to use lightning attention
 ```
-from lightning_attn.ops import lightning_attn2
+import torch
+
+from lightning_attn.ops import lightning_attn_func
 from lightning_attn.utils import _build_slope_tensor
 
-b, h, n, d = 2, 12, 2048, 64
+dtype = torch.bfloat16
+device = torch.device("cuda")
+b, h, n, d, e = 2, 12, 2048, 64, 64
 
-q = (torch.randn((b, h, n, d), dtype=dtype, device=device) / 10).requires_grad_()
-k = (torch.randn((b, h, n, d), dtype=dtype, device=device) / 10).requires_grad_()
-v = (torch.randn((b, h, n, e), dtype=dtype, device=device) / 10).requires_grad_()
+q = torch.randn((b, h, n, d), dtype=dtype, device=device).requires_grad_()
+k = torch.randn((b, h, n, d), dtype=dtype, device=device).requires_grad_()
+v = torch.randn((b, h, n, e), dtype=dtype, device=device).requires_grad_()
 s = _build_slope_tensor(h).to(q.device).to(torch.float32)
 
-o = lightning_attn2(q, k, v, s)
+o = lightning_attn_func(q, k, v, s)
+
+print(o.shape)
 ```
 
 ## Benchmark
@@ -76,6 +82,13 @@ lightning2-speed_bwd-batch4-head32-qk_dim128-v_dim128-dtype_bf16:
 6  32768.0  11110.400488  13190.400977  17286.400977
 ```
 
+## Todo
+
+- [ ] Add support for lightning attention parallel version.
+- [ ] Add support for linear attention with no decay.
+- [ ] Add support for linear attention with data dependent decay.
+
+
 ## Citation
 If you wish to cite our work, please use the following reference:
 ```
@@ -96,3 +109,7 @@ If you wish to cite our work, please use the following reference:
 }
 
 ```
+
+## Acknowledgment
+
+Thanks for [sustcsonglin](https://github.com/sustcsonglin) and [yzhangcs](https://github.com/yzhangcs) for the helpful discussions. You may also find [flash-linear-attention](https://github.com/sustcsonglin/flash-linear-attention) useful.
