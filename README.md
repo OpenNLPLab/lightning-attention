@@ -90,10 +90,10 @@ lightning2-speed_bwd-batch4-head32-qk_dim128-v_dim128-dtype_bf16:
 
 
 ## Citation
-If you find our work useful, please cite the following work:
+If you find our work useful, please cite the following papers:
 ```
 @misc{qin2023scaling,
-      title={Scaling TransNormer to 175 Billion Parameters}, 
+      title={Scaling TransNormer to 175 Billion Parameters},
       author={Zhen Qin and Dong Li and Weigao Sun and Weixuan Sun and Xuyang Shen and Xiaodong Han and Yunshen Wei and Baohong Lv and Fei Yuan and Xiao Luo and Yu Qiao and Yiran Zhong},
       year={2023},
       eprint={2307.14995},
@@ -102,7 +102,7 @@ If you find our work useful, please cite the following work:
 }
 
 @misc{qin2024lightning,
-      title={Lightning Attention-2: A Free Lunch for Handling Unlimited Sequence Lengths in Large Language Models}, 
+      title={Lightning Attention-2: A Free Lunch for Handling Unlimited Sequence Lengths in Large Language Models},
       author={Zhen Qin and Weigao Sun and Dong Li and Xuyang Shen and Weixuan Sun and Yiran Zhong},
       year={2024},
       eprint={2401.04658},
