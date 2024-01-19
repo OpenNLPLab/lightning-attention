@@ -17,6 +17,11 @@ This repository provides the official implementation of Lightning Attention 1/2 
 ```
 pip install lightning_attn
 ```
+The code has been test under the following environment:
+```
+triton                   2.0.0
+triton-nightly           2.1.0.dev20230728172942
+```
 
 ## How to use lightning attention
 ```
