@@ -22,6 +22,11 @@ The code has been test under the following environment:
 triton                   2.0.0
 triton-nightly           2.1.0.dev20230728172942
 ```
+You can use the following command to install:
+```
+pip install triton==2.0.0
+pip install triton-nightly==2.1.0.dev20230728172942 --index-url https://aiinfra.pkgs.visualstudio.com/PublicPackages/_packaging/Triton-Nightly/pypi/simple/
+```
 
 ## How to use lightning attention
 ```
