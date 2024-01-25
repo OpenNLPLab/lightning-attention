@@ -102,10 +102,10 @@ lightning2-speed_bwd-batch4-head32-qk_dim128-v_dim128-dtype_bf16:
 ## Citation
 If you find our work useful, please cite the following papers:
 ```
-@misc{qin2023scaling,
-      title={Scaling TransNormer to 175 Billion Parameters},
-      author={Zhen Qin and Dong Li and Weigao Sun and Weixuan Sun and Xuyang Shen and Xiaodong Han and Yunshen Wei and Baohong Lv and Fei Yuan and Xiao Luo and Yu Qiao and Yiran Zhong},
-      year={2023},
+@misc{qin2024transnormerllm,
+      title={TransNormerLLM: A Faster and Better Large Language Model with Improved TransNormer},
+      author={Zhen Qin and Dong Li and Weigao Sun and Weixuan Sun and Xuyang Shen and Xiaodong Han and Yunshen Wei and Baohong Lv and Xiao Luo and Yu Qiao and Yiran Zhong},
+      year={2024},
       eprint={2307.14995},
       archivePrefix={arXiv},
       primaryClass={cs.CL}
