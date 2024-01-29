@@ -37,7 +37,7 @@ from lightning_attn.utils import _build_slope_tensor
 
 dtype = torch.bfloat16
 device = torch.device("cuda")
-b, h, n, d, e = 2, 12, 2048, 64, 64
+b, h, n, d, e = 2, 12, 2048, 192, 192
 
 q = torch.randn((b, h, n, d), dtype=dtype, device=device).requires_grad_()
 k = torch.randn((b, h, n, d), dtype=dtype, device=device).requires_grad_()
