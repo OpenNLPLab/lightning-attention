@@ -15,3 +15,6 @@ s = _build_slope_tensor(h).to(q.device).to(torch.float32)
 o = lightning_attn_func(q, k, v, s)
 
 print(o.shape)
+
+loss = o.sum()
+loss.backward()

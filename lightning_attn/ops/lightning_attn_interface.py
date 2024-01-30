@@ -1,3 +1,7 @@
+import math
+
+import torch.nn.functional as F
+
 from .triton import lightning_attn2
 
 
@@ -5,11 +9,21 @@ def is_support(dim):
     return 16 % dim
 
 
+def next_power_of_2(n):
+    return 2 ** (int(math.ceil(math.log(n, 2))))
+
+
 def lightning_attn_func(q, k, v, s=None):
     assert s != None
     b, h, n, d = q.shape
     e = v.shape[-1]
     assert is_support(d) and is_support(e)
+
+    # pad v's feature dim to power of 2
+    e_pad = next_power_of_2(e)
+    need_pad = e_pad != e
+    if need_pad:
+        v = F.pad(v, (0, e_pad - e))
 
     if d > 128:
         # split over head
@@ -32,5 +46,8 @@ def lightning_attn_func(q, k, v, s=None):
             o += lightning_attn2(q1, k1, v, s)
     else:
         o = lightning_attn2(q, k, v, s)
+
+    if need_pad:
+        o = o[:, :, :, :e]
 
     return o
