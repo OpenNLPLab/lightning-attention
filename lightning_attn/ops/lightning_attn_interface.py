@@ -28,7 +28,7 @@ def lightning_attn_func(q, k, v, s=None):
     if d > 128:
         # split over head
         if 64 % d:
-            m = 128
+            m = 64
         elif 32 % d:
             m = 32
         elif 16 % d:
