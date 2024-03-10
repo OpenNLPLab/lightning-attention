@@ -5,7 +5,7 @@ import torch
 import triton
 from einops import rearrange
 
-from lightning_attn.ops import lightning_attn2
+from lightning_attn.ops import lightning_attn2, lightning_attn2_no_decay
 from lightning_attn.utils import _build_slope_tensor, get_memory
 
 try:
@@ -62,10 +62,10 @@ speed_configs = [
         xlabel="Sequence Length",
         ylabel="Execution Time(ms)",
         line_arg="provider",
-        line_vals=["lightning2"]
+        line_vals=["lightning2", "lightning2_no_decay"]
         + (["flash2"] if HAS_FLASH else [])
         + (["xformers"] if HAS_XFORMERS else []),
-        line_names=["Lightning2"]
+        line_names=["Lightning2", "Lightning2NoDecay"]
         + (["Flash2"] if HAS_FLASH else [])
         + (["Xformers"] if HAS_XFORMERS else []),
         styles=[
@@ -103,6 +103,8 @@ def bench_speed(b, h, n, d, dtype, device, mode, provider):
 
     if provider == "lightning2":
         fn = lambda: lightning_attn2(q, k, v, s)
+    elif provider == "lightning2_no_decay":
+        fn = lambda: lightning_attn2_no_decay(q, k, v)
     elif provider == "flash2":
         fn = lambda: flash_wrapper(q, k, v)
     else:
@@ -126,10 +128,10 @@ memory_configs = [
         xlabel="Sequence Length",
         ylabel="Memory(mb)",
         line_arg="provider",
-        line_vals=["lightning2"]
+        line_vals=["lightning2", "lightning2_no_decay"]
         + (["flash2"] if HAS_FLASH else [])
         + (["xformers"] if HAS_XFORMERS else []),
-        line_names=["Lightning2"]
+        line_names=["Lightning2", "Lightning2NoDecay"]
         + (["Flash2"] if HAS_FLASH else [])
         + (["Xformers"] if HAS_XFORMERS else []),
         styles=[
@@ -139,7 +141,7 @@ memory_configs = [
             ("blue", "-"),
             ("black", "-"),
         ],
-        plot_name=f"lightning2-speed_{mode}-batch{b}-head{h}-qk_dim{d}-v_dim{e}-dtype_{dtype_name}",
+        plot_name=f"lightning2-memory_{mode}-batch{b}-head{h}-qk_dim{d}-v_dim{e}-dtype_{dtype_name}",
         args={
             "b": b,
             "h": h,
@@ -166,6 +168,8 @@ def bench_memory(b, h, n, d, dtype, device, mode, provider):
 
     if provider == "triton":
         fn = lambda: lightning_attn2(q, k, v, s)
+    elif provider == "lightning2_no_decay":
+        fn = lambda: lightning_attn2_no_decay(q, k, v)
     elif provider == "flash":
         fn = lambda: flash_wrapper(q, k, v)
     else:
@@ -191,5 +195,5 @@ def bench_memory(b, h, n, d, dtype, device, mode, provider):
 
 save_path = "stat/lightning2"
 os.makedirs(save_path, exist_ok=True)
-# bench_speed.run(save_path=save_path, print_data=True)
+bench_speed.run(save_path=save_path, print_data=True)
 bench_memory.run(save_path=save_path, print_data=True)

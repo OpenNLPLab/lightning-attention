@@ -2,7 +2,7 @@ import math
 
 import torch.nn.functional as F
 
-from .triton import lightning_attn2
+from .triton import lightning_attn2, lightning_attn2_no_decay
 
 
 def is_support(dim):
@@ -43,9 +43,15 @@ def lightning_attn_func(q, k, v, s=None):
             end = arr[i + 1]
             q1 = q[..., start:end]
             k1 = k[..., start:end]
-            o += lightning_attn2(q1, k1, v, s)
+            if s != None:
+                o += lightning_attn2(q1, k1, v, s)
+            else:
+                o += lightning_attn2_no_decay(q1, k1, v)
     else:
-        o = lightning_attn2(q, k, v, s)
+        if s != None:
+            o = lightning_attn2(q, k, v, s)
+        else:
+            o = lightning_attn2_no_decay(q1, k1, v)
 
     if need_pad:
         o = o[:, :, :, :e]

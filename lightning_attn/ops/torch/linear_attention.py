@@ -13,15 +13,18 @@ def get_mask(n, slope=1):
 
 
 def get_full_mask(n, slopes):
-    arr = []
-    for slope in slopes:
-        arr.append(get_mask(n, slope.item()))
-    mask = torch.stack(arr, dim=0)
+    if slopes == None:
+        mask = torch.tril(torch.ones((n, n)))
+    else:
+        arr = []
+        for slope in slopes:
+            arr.append(get_mask(n, slope.item()))
+        mask = torch.stack(arr, dim=0)
 
     return mask
 
 
-def linear_attn(q, k, v, s):
+def linear_attn(q, k, v, s=None):
     b, h, n, d = q.shape
     mask = get_full_mask(n, s).to(q.device).to(torch.float32)
     qk = torch.matmul(q, k.transpose(2, 3))

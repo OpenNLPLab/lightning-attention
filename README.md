@@ -99,7 +99,7 @@ lightning2-speed_bwd-batch4-head32-qk_dim128-v_dim128-dtype_bf16:
 ## Todo
 
 - [ ] Add support for lightning attention parallel version.
-- [ ] Add support for linear attention with no decay.
+- [x] Add support for linear attention with no decay.
 - [ ] Add support for linear attention with data dependent decay.
 - [ ] Add block size for 3090.
 - [ ] Add efficient version to deal with not power of 2 feature dim.
