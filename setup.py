@@ -9,7 +9,7 @@ setup(
         ]
     ),
     install_requires=["torch", "einops", "triton"],
-    version="0.0.4",
+    version="0.0.5",
     author="Doraemonzzz",
     include_package_data=True,
 )
