@@ -14,7 +14,6 @@ def next_power_of_2(n):
 
 
 def lightning_attn_func(q, k, v, s=None):
-    assert s != None
     b, h, n, d = q.shape
     e = v.shape[-1]
     assert is_support(d) and is_support(e)
