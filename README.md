@@ -75,7 +75,7 @@ lightning2-speed_bwd-batch4-head32-qk_dim128-v_dim128-dtype_bf16:
 5  16384.0   37.212578  121.685730   276.402618
 6  32768.0   74.594788  470.666473  1075.611450
 
-lightning2-speed_fwd-batch4-head32-qk_dim128-v_dim128-dtype_bf16:
+lightning2-memory_fwd-batch4-head32-qk_dim128-v_dim128-dtype_bf16:
          n   Lightning2       Flash2     Xformers
 0    512.0    64.000488    64.250977    64.250488
 1   1024.0   128.000488   128.500977   128.500488
@@ -85,7 +85,7 @@ lightning2-speed_fwd-batch4-head32-qk_dim128-v_dim128-dtype_bf16:
 5  16384.0  2048.000488  2056.000977  2056.000488
 6  32768.0  4096.000488  4112.000977  4112.000488
 
-lightning2-speed_bwd-batch4-head32-qk_dim128-v_dim128-dtype_bf16:
+lightning2-memory_bwd-batch4-head32-qk_dim128-v_dim128-dtype_bf16:
          n    Lightning2        Flash2      Xformers
 0    512.0    173.600488    206.100977    270.100977
 1   1024.0    347.200488    412.200977    540.200977
