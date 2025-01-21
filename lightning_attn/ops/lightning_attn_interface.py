@@ -42,12 +42,12 @@ def lightning_attn_func(q, k, v, s=None):
             end = arr[i + 1]
             q1 = q[..., start:end]
             k1 = k[..., start:end]
-            if s != None:
+            if s is not None:
                 o += lightning_attn2(q1, k1, v, s)
             else:
                 o += lightning_attn2_no_decay(q1, k1, v)
     else:
-        if s != None:
+        if s is not None:
             o = lightning_attn2(q, k, v, s)
         else:
             o = lightning_attn2_no_decay(q1, k1, v)
