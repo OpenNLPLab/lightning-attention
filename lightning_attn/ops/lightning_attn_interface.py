@@ -50,7 +50,7 @@ def lightning_attn_func(q, k, v, s=None):
         if s != None:
             o = lightning_attn2(q, k, v, s)
         else:
-            o = lightning_attn2_no_decay(q1, k1, v)
+            o = lightning_attn2_no_decay(q, k, v)
 
     if need_pad:
         o = o[:, :, :, :e]
