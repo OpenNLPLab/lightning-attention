@@ -2,7 +2,7 @@ import math
 
 import torch.nn.functional as F
 
-from .triton import lightning_attn2, lightning_attn2_no_decay
+from .triton import lightning_attn2, lightning_attn2_no_decay, lightning_attn2_parallel
 
 
 def is_support(dim):
@@ -13,7 +13,14 @@ def next_power_of_2(n):
     return 2 ** (int(math.ceil(math.log(n, 2))))
 
 
-def lightning_attn_func(q, k, v, s=None):
+def lightning_attn_func(q, k, v, s=None, variant="chunk_loop"):
+    if s is None:
+        fn = lightning_attn2_no_decay
+    else:
+        if variant == "parallel":
+            fn = lightning_attn2_parallel
+        elif variant == "chunk_loop":
+            fn = lightning_attn2
     b, h, n, d = q.shape
     e = v.shape[-1]
     assert is_support(d) and is_support(e)
@@ -43,14 +50,14 @@ def lightning_attn_func(q, k, v, s=None):
             q1 = q[..., start:end]
             k1 = k[..., start:end]
             if s != None:
-                o += lightning_attn2(q1, k1, v, s)
+                o += fn(q1, k1, v, s)
             else:
-                o += lightning_attn2_no_decay(q1, k1, v)
+                o += fn(q1, k1, v)
     else:
         if s != None:
-            o = lightning_attn2(q, k, v, s)
+            o = fn(q, k, v, s)
         else:
-            o = lightning_attn2_no_decay(q, k, v)
+            o = fn(q, k, v)
 
     if need_pad:
         o = o[:, :, :, :e]
